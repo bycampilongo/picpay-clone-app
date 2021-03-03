@@ -24,7 +24,7 @@ const icons = {
         lib: Ionicons,
         name: 'ios-notifications-outline'
     },
-    Settings:{
+    Settings: {
         lib: AntDesign,
         name: 'setting'
     }
@@ -34,11 +34,16 @@ export default function Navigation() {
 
 
     return (
-        <Tab.Navigator 
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ color, size }) => {
-                    if(route.name === 'Pay'){
-                        return <PayButton />
+        <Tab.Navigator
+            screenOptions={({ route, navigation }) => ({
+                tabBarIcon: ({ color, size, focused }) => {
+                    if (route.name === 'Pay') {
+                        return (
+                            <PayButton
+                                onPress={() => navigation.navigate('Pay')}
+                                focused={focused}
+                            />
+                        )
                     }
                     const { lib: Icon, name } = icons[route.name]
                     return <Icon name={name} size={size} color={color} />
